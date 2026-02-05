@@ -1,8 +1,22 @@
-<form method="POST">
-    <input type="text" name="ime" placeholder="Postavi pitanje">
-    <button type="submit">Pošalji</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Web App</title>
+</head>
+<body>
+    <h1>Zdravo!</h1>
 
-{% if odgovor %}
-    <p><strong>AI kaže:</strong> {{ odgovor }}</p>
-{% endif %}
+    <form method="POST">
+        <input type="text" name="ime" placeholder="Postavi pitanje">
+        <button type="submit">Pošalji</button>
+    </form>
+
+    {% if odgovor %}
+        <p><strong>AI kaže:</strong> {{ odgovor }}</p>
+    {% endif %}
+
+    {% if greska %}
+        <p style="color:red;"><strong>GREŠKA:</strong> {{ greska }}</p>
+    {% endif %}
+</body>
+</html>
