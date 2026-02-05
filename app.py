@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
-from openai import OpenAI
 import os
+from openai import OpenAI
 
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
@@ -9,20 +9,24 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def home():
     odgovor = None
+    greska = None
 
     if request.method == "POST":
         pitanje = request.form.get("ime")
 
         if pitanje:
-            response = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "user", "content": pitanje}
-                ]
-            )
-            odgovor = response.choices[0].message.content
+            try:
+                response = client.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {"role": "user", "content": pitanje}
+                    ]
+                )
+                odgovor = response.choices[0].message.content
+            except Exception as e:
+                greska = str(e)
 
-    return render_template("index.html", odgovor=odgovor)
+    return render_template("index.html", odgovor=odgovor, greska=greska)
 
 
 if __name__ == "__main__":
