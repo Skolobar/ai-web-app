@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Moja prva web aplikacija</title>
-</head>
-<body>
-    <h1>Zdravo!</h1>
+<form method="POST">
+    <input type="text" name="ime" placeholder="Postavi pitanje">
+    <button type="submit">Pošalji</button>
+</form>
 
-    <form method="POST">
-        <input type="text" name="ime" placeholder="Upiši svoje ime">
-        <button type="submit">Pošalji</button>
-    </form>
-
-    {% if ime %}
-        <p>Zdravo {{ ime }}!</p>
-    {% endif %}
-</body>
-</html>
+{% if odgovor %}
+    <p><strong>AI kaže:</strong> {{ odgovor }}</p>
+{% endif %}
